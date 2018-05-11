@@ -1,26 +1,43 @@
 #include "ofApp.h"
-#include "Brick.hpp"
+#include "Bricks.hpp"
+#include "Ball.hpp"
 
-int state = 0;
-Brick* brick = new Brick();
+#include <iostream>
+using std::cout;
+
+Bricks* bricks = new Bricks();
+Ball* ball = new Ball();
 
 //--------------------------------------------------------------
 ofApp::~ofApp()
 {
-    delete brick;
-    brick = nullptr;
+    delete bricks;
+    bricks = nullptr;
+    
+    delete ball;
+    ball = nullptr;
 }
 
 //--------------------------------------------------------------
 void ofApp::setup()
 {
-    brick->initializePositions();
+    bricks->initializePositions();
 }
 
 //--------------------------------------------------------------
 void ofApp::update()
 {
-
+    if (state == 2)
+    {
+        ball->updateBall();
+    
+        if (ball->get_xPos() > bricks->get_xPos()/100
+            && ball->get_xPos() < bricks->get_xPos()/100 +100)
+        {
+            bricks->set_brickState(1);
+            //cout << "yup!" << endl;
+        }
+    }
 }
 
 //--------------------------------------------------------------
@@ -68,7 +85,8 @@ void ofApp::gameState(int state)
         }
         case 2: // play mode
         {
-            brick->drawBricks();
+            bricks->drawBricks();
+            ball->drawBall();
             state = endScreen();
             break;
         }
@@ -107,7 +125,7 @@ int ofApp::pauseScreen()
 int ofApp::endScreen()
 {
     
-    return state;
+    return state; // 4
 }
 
 //--------------------------------------------------------------

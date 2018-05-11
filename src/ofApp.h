@@ -1,9 +1,11 @@
 #pragma once
 
 #include "ofMain.h"
+#include <vector>
 
 class ofApp : public ofBaseApp
 {
+    int state = 0;
     
 	public:
         ~ofApp();
