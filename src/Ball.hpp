@@ -14,11 +14,13 @@ public:
     void drawBall();
     void updateBall();
     
-    void set_xPos(float xPos);
+    void set_xPos(int xPos);
     int get_xPos();
     
-    void set_yPos(float yPos);
+    void set_yPos(int yPos);
     int get_yPos();
+    
+    ofVec2f get_ballPosition(int xPos, int yPos);
     
     int ballCollision();
 };

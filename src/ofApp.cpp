@@ -8,6 +8,9 @@ using std::cout;
 Bricks* bricks = new Bricks();
 Ball* ball = new Ball();
 
+int brState = 2;
+ofVec2f brPos, baPos;
+
 //--------------------------------------------------------------
 ofApp::~ofApp()
 {
@@ -27,17 +30,20 @@ void ofApp::setup()
 //--------------------------------------------------------------
 void ofApp::update()
 {
-    if (state == 2)
-    {
+//    if (state == 2)
+//    {
         ball->updateBall();
-    
-        if (ball->get_xPos() > bricks->get_xPos()/100
-            && ball->get_xPos() < bricks->get_xPos()/100 +100)
+        
+     brPos = bricks->getBrickPositionFromWorldPosition(ball->get_xPos(), ball->get_yPos());
+//        baPos = ball->get_ballPosition(ball->get_xPos(), ball->get_yPos());
+        if (brPos == bricks->get_brickPosition())
         {
-            bricks->set_brickState(1);
-            //cout << "yup!" << endl;
+            brState = bricks->get_brickState();
+            bricks->set_brickState(brState -=1);
         }
-    }
+    
+//    }
+    cout << brState << " " << bricks->get_brickState() << endl;
 }
 
 //--------------------------------------------------------------
@@ -85,8 +91,14 @@ void ofApp::gameState(int state)
         }
         case 2: // play mode
         {
-            bricks->drawBricks();
+            bricks->drawBricks(brState);
             ball->drawBall();
+            
+            ofPushMatrix();
+                ofSetColor(0,0,255);  // blue
+            
+            ofPopMatrix();
+            
             state = endScreen();
             break;
         }

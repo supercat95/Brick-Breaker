@@ -10,25 +10,26 @@ private:
     int xPos, yPos;
     int width = 100, height = 60;
     static constexpr int xNum = 10, yNum = 8;
-    int brickState = 2;
+    int brickState = 2, brickPosition[xNum][yNum];
     
 public:
-    int brickPosition[xNum][yNum];
-    
     Bricks() = default;
     Bricks(int xPos, int yPos, int width, int height, int brickState);
     
     void initializePositions();
-    void drawBricks();
+    void drawBricks(int brickState);
     
-    void set_xPos(float xPos);
+    void set_xPos(int xPos);
     int get_xPos();
     
-    void set_yPos(float yPos);
+    void set_yPos(int yPos);
     int get_yPos();
     
     void set_brickState(int brickState);
     int get_brickState();
     
-    ofVec2f getBrickPositionFromWorldPosition(float xPos, float yPos);
+    void set_brickPosition(int brickPosition[xNum][yNum]);
+    ofVec2f get_brickPosition();
+    
+    ofVec2f getBrickPositionFromWorldPosition(int xPos, int yPos);
 };

@@ -24,7 +24,7 @@ void Ball::updateBall()
 }
 
 //--------------------------------------------------------------
-void Ball::set_xPos(float xPos)
+void Ball::set_xPos(int xPos)
 {
     this->xPos = xPos;
 }
@@ -35,7 +35,7 @@ int Ball::get_xPos()
 }
 
 //--------------------------------------------------------------
-void Ball::set_yPos(float yPos)
+void Ball::set_yPos(int yPos)
 {
     this->yPos = yPos;
 }
@@ -46,9 +46,15 @@ int Ball::get_yPos()
 }
 
 //--------------------------------------------------------------
+ofVec2f Ball::get_ballPosition(int xPos, int yPos)
+{
+    return ofVec2f(int(xPos), int(yPos));
+}
+
+//--------------------------------------------------------------
 int Ball:: ballCollision()
 {
     // if
-    xPos *=(ofRandom(-1,-.7));
-    yPos *=(ofRandom(-1,-.7));
+    xPos *= -1;
+    yPos *= -1;
 }
